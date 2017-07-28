@@ -7,11 +7,11 @@ Typesafe, refactorable handling of immutable objects with typescript
 
 Replicator is an utility to replicate an object.
 
-- Typesafe properties
+##### Typesafe properties
 ![image](https://user-images.githubusercontent.com/20232625/28736850-297d44e4-73ec-11e7-808c-5d0b5b47336a.png)
-- Typesafe property values
+##### Typesafe property values
 ![image](https://user-images.githubusercontent.com/20232625/28736918-7c974652-73ec-11e7-9742-ae2ea6664892.png)
-- Refactorable 
+##### Refactorable and easy to read
 
 ### Usage
 
