@@ -5,7 +5,17 @@ Typesafe, refactorable handling of immutable objects with typescript
 
 ## Replicator
 
-Replicator is an utility to replicate an object. It is typesafe by using the keyof-Operator to check string literal types. 
+Replicator is an utility to replicate an object.
+
+##### Typesafe properties
+![image](https://user-images.githubusercontent.com/20232625/28736850-297d44e4-73ec-11e7-808c-5d0b5b47336a.png)
+
+##### Typesafe property values
+![image](https://user-images.githubusercontent.com/20232625/28736918-7c974652-73ec-11e7-9742-ae2ea6664892.png)
+
+##### refactorable 
+
+### Usage
 
 1. Load an object by calling `Replicator.forObject()`
 2. Navigate down the object tree through the typesafe function `child()`
@@ -14,6 +24,12 @@ Replicator is an utility to replicate an object. It is typesafe by using the key
     - `modify('prop').by((T) => newValue:T)` for example `((oldValue) => oldValue + newValue)`
 4. Repeat step 3 and 4 until all modifications are done
 5. Produce the replica with `replicate()`
+
+### Examples
+
+![image](https://user-images.githubusercontent.com/20232625/28736806-e85e2e74-73eb-11e7-8a39-434144de62b7.png)
+
+![image](https://user-images.githubusercontent.com/20232625/28736833-0ea891dc-73ec-11e7-8f38-1c76e9bdaa38.png)
 
 ### Behaviour
 
