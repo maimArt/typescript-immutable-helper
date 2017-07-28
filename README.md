@@ -3,7 +3,7 @@ Typesafe, refactorable handling of immutable objects with typescript
 
 [![NPM](https://nodei.co/npm/typescript-immutable-replicator.png)](https://nodei.co/npm/typescript-immutable-replicator/)
 
-## StateProducer
+## Replicator
 
 Replicator is an utility to replicate an object. It is typesafe by using the keyof-Operator to check string literal types. 
 
