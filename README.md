@@ -35,7 +35,7 @@ Replicator is an utility to replicate an object.
 -   freeze in --> freeze out. If the source object was frozen (for detecting manipulations while development), then the produced replica will also be deep frozen.
 -   warning if source object is not deep frozen (produced replica will be deep frozen)
 
-### DeepFreeze
+## DeepFreeze
 
 `deepFreeze()` applies Object.freeze() recursively on an object to make it immutable
 `isDeepFrozen()` checks if an object is recursively frozen.
