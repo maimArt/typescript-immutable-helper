@@ -1,0 +1,43 @@
+{
+  "name": "typescript-immutable-replicator",
+  "version": "0.1.0",
+  "description": "Typesafe, refactorable Typescript replicator for immutable objects",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha -r ts-node/register src/tests/*spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maimArt/typescript-immutable-replicator.git"
+  },
+  "keywords": [
+    "typescript",
+    "typesafe",
+    "immutable",
+    "stateless",
+    "functional",
+    "data",
+    "datastructure"
+  ],
+  "author": "Martin Maier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maimArt/typescript-immutable-replicator/issues"
+  },
+  "homepage": "https://github.com/maimArt/typescript-immutable-replicator#readme",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.1",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.17",
+    "@types/lodash": "^4.14.71",
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.4.2",
+    "typings": "^2.1.1"
+  }
+}

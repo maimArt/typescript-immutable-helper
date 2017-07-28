@@ -1,0 +1,16 @@
+# Tests
+src/tests
+
+# Dependency directories
+node_modules/
+
+# IDE
+*.iml
+.idea
+
+# Etc
+dist
+coverage
+.gitignore
+
+
