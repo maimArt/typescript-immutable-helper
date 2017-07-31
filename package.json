@@ -1,7 +1,7 @@
 {
   "name": "typescript-immutable-helper",
-  "version": "0.1.0",
-  "description": "Typesafe, refactorable Typescript replicator for immutable objects",
+  "version": "0.1.1",
+  "description": "Helpers for handling immutable objects with typescript",
   "main": "index.ts",
   "scripts": {
     "build": "tsc",

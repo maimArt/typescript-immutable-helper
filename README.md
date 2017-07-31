@@ -1,5 +1,5 @@
 # typescript-immutable-helper
-Typesafe, refactorable cloning and modifying of immutable objects with typescript
+Helpers for handling immutable objects with typescript
 
 [![NPM](https://nodei.co/npm/typescript-immutable-helper.png)](https://nodei.co/npm/typescript-immutable-helper/)
 
