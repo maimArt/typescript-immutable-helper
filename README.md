@@ -9,13 +9,14 @@ Replicator is an utility to replicate an object.
 
 ![image](https://user-images.githubusercontent.com/20232625/28767484-22a1d330-75d4-11e7-9667-01271c7e2448.png)
 
-##### typesafe properties
+### Characteristics
+###### typesafe properties
 ![image](https://user-images.githubusercontent.com/20232625/28767468-14cb5aa6-75d4-11e7-8193-dcf828133035.png)
-##### typesafe property values
+###### typesafe property values
 ![image](https://user-images.githubusercontent.com/20232625/28767500-3b6f082e-75d4-11e7-8ec3-1e1392209396.png)
-##### chainable
+###### chainable
 ![image](https://user-images.githubusercontent.com/20232625/28767664-dc00269c-75d4-11e7-9c6d-c179c0b12eaf.png)
-##### tefactorable and easy to read
+###### refactorable and easy to read
 
 ### Usage
 
