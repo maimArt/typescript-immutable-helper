@@ -15,13 +15,13 @@ Replicator is a tool to replicate and modify immutable objects.
 
 ### Usage
 
-1. Load an object by calling `assign()`
-2. Navigate down the object tree through the typesafe function `child()`
+1. Load an object by calling `ReplicationBuilder.forObject()`
+2. Navigate down the object tree through the typesafe function `getChild()`
 3. Modify a property with either 
     - `modify('prop').to(newValue:T)` or
     - `modify('prop').by((T) => newValue:T)` for example `((oldValue) => oldValue + newValue)`
 4. Repeat step 3 and 4 until all modifications are done
-5. Produce the replica with `replicate()`
+5. Produce the replica with `build()`
 
 ### Examples
 

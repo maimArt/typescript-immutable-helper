@@ -2,21 +2,12 @@ import * as _ from 'lodash'
 import {deepFreeze, isDeepFrozen} from './deepFreeze'
 
 /**
- * init function for better syntax
- * @param {T} state
- * @returns {Replicator<T>}
- */
-export function assign<T>(state:T): Replicator<T>{
-    return Replicator.forObject(state);
-}
-
-/**
  * Class that helps to replicate a new object by encapsulating a deep copy of the source object
  * If input object is frozen by (@link Object.freeze()} or {@link deepFreeze} then the replica will be produced frozen
  * freeze in --> deep freeze out
  * Warns if source object is just frozen, not deep frozen
  **/
-export class Replicator<T> {
+export class ReplicationBuilder<T> {
     private replica: T = null
     private freeze = false
 
@@ -32,28 +23,28 @@ export class Replicator<T> {
         }
     }
 
-    public static forObject<T>(sourceObject: T): Replicator<T> {
-        return new Replicator<T>(sourceObject)
+    public static forObject<T>(sourceObject: T): ReplicationBuilder<T> {
+        return new ReplicationBuilder<T>(sourceObject)
     }
 
     /** switch to child node
      * @param {K} childNode of the root node
      * @returns {ReplicaChildOperator<T, T[K]>} operator of child node
      **/
-    public child<K extends keyof T>(childNode: K): ReplicaChildOperator<T, T[K]> {
+    public getChild<K extends keyof T>(childNode: K): ReplicaChildOperator<T, T[K]> {
         let node = this.replica[childNode]
-        return new ReplicaChildOperator((() => this.replicate()), this.replica, node, childNode)
+        return new ReplicaChildOperator((() => this.build()), this.replica, node, childNode)
     }
 
-    modify<K extends keyof T>(childNode: K): PropertyModifier<Replicator<T>, T[K]> {
-        return new PropertyModifier<Replicator<T>, T[K]>(this, childNode, this.replica)
+    modify<K extends keyof T>(childNode: K): PropertyModifier<ReplicationBuilder<T>, T[K]> {
+        return new PropertyModifier<ReplicationBuilder<T>, T[K]>(this, childNode, this.replica)
     }
 
     /**
      * produces the replica
      * @returns {T} replica
      */
-    public replicate(): T {
+    public build(): T {
         if (this.freeze) {
             this.replica = deepFreeze(this.replica)
         }
@@ -65,13 +56,13 @@ export class Replicator<T> {
  * Operator for nodes of the replica
  */
 class ReplicaChildOperator<RT, T> {
-    private replicateFunction: ()=>RT
+    private buildFunction: ()=>RT
     private node: T
     private replica: RT;
     private relativePath;
 
-    constructor(replicateFunction: () => RT, replica: RT, node: T, relativePath: string) {
-        this.replicateFunction = replicateFunction
+    constructor(buildFunction: () => RT, replica: RT, node: T, relativePath: string) {
+        this.buildFunction = buildFunction
         this.node = node
         this.replica = replica;
         this.relativePath = relativePath;
@@ -81,9 +72,9 @@ class ReplicaChildOperator<RT, T> {
      * @param {K} childNode of this node
      * @returns {ReplicaChildOperator<RT, N[K]>} traversable child node
      **/
-    child<K extends keyof T>(childNode: K): ReplicaChildOperator<RT, T[K]> {
+    getChild<K extends keyof T>(childNode: K): ReplicaChildOperator<RT, T[K]> {
         let branch = this.node[childNode]
-        return new ReplicaChildOperator(this.replicateFunction, this.replica, branch, this.relativePath + '.' + childNode)
+        return new ReplicaChildOperator(this.buildFunction, this.replica, branch, this.relativePath + '.' + childNode)
     }
 
     modify<K extends keyof T>(childNode: K): PropertyModifier<ReplicaChildOperator<RT, T>, T[K]> {
@@ -94,8 +85,8 @@ class ReplicaChildOperator<RT, T> {
      * produces the replica
      * @returns {RT} replica
      */
-    replicate():RT {
-      return this.replicateFunction()
+    build():RT {
+      return this.buildFunction()
     }
 }
 
