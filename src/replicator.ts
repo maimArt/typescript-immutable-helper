@@ -2,6 +2,15 @@ import * as _ from 'lodash'
 import {deepFreeze, isDeepFrozen} from './deepFreeze'
 
 /**
+ * init function for better syntax
+ * @param {T} state
+ * @returns {Replicator<T>}
+ */
+export function assign<T>(state:T): Replicator<T>{
+    return Replicator.forObject(state);
+}
+
+/**
  * Class that helps to replicate a new object by encapsulating a deep copy of the source object
  * If input object is frozen by (@link Object.freeze()} or {@link deepFreeze} then the replica will be produced frozen
  * freeze in --> deep freeze out

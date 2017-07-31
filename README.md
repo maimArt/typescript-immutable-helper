@@ -1,11 +1,11 @@
 # typescript-immutable-replicator
-Typesafe, refactorable handling of immutable objects with typescript
+Typesafe, refactorable cloning and modifying of immutable objects with typescript
 
 [![NPM](https://nodei.co/npm/typescript-immutable-replicator.png)](https://nodei.co/npm/typescript-immutable-replicator/)
 
 ## Replicator
 
-Replicator is an utility to replicate an object.
+Replicator is a tool to replicate and modify immutable objects.
 
 ##### Typesafe properties
 ![image](https://user-images.githubusercontent.com/20232625/28736850-297d44e4-73ec-11e7-808c-5d0b5b47336a.png)
