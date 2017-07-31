@@ -8,9 +8,7 @@ Helpers for handling immutable objects with typescript
 Replicator is a tool to replicate and modify immutable objects.
 
 ### Syntax
-```typescript 
-let replica = ReplicationBuilder.forObject(immutableObject).getChild("child").modify("attribute").to("value").build()
-```
+![image](https://user-images.githubusercontent.com/20232625/28767484-22a1d330-75d4-11e7-9667-01271c7e2448.png)
 
 ### Characteristics
 ###### typesafe properties
