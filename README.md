@@ -7,11 +7,15 @@ Typesafe, refactorable handling of immutable objects with typescript
 
 Replicator is an utility to replicate an object.
 
-##### Typesafe properties
-![image](https://user-images.githubusercontent.com/20232625/28736850-297d44e4-73ec-11e7-808c-5d0b5b47336a.png)
-##### Typesafe property values
-![image](https://user-images.githubusercontent.com/20232625/28736918-7c974652-73ec-11e7-9742-ae2ea6664892.png)
-##### Refactorable and easy to read
+![image](https://user-images.githubusercontent.com/20232625/28767484-22a1d330-75d4-11e7-9667-01271c7e2448.png)
+
+##### typesafe properties
+![image](https://user-images.githubusercontent.com/20232625/28767468-14cb5aa6-75d4-11e7-8193-dcf828133035.png)
+##### typesafe property values
+![image](https://user-images.githubusercontent.com/20232625/28767500-3b6f082e-75d4-11e7-8ec3-1e1392209396.png)
+##### chainable
+![image](https://user-images.githubusercontent.com/20232625/28767664-dc00269c-75d4-11e7-9c6d-c179c0b12eaf.png)
+##### tefactorable and easy to read
 
 ### Usage
 
@@ -25,9 +29,9 @@ Replicator is an utility to replicate an object.
 
 ### Examples
 
-![image](https://user-images.githubusercontent.com/20232625/28736806-e85e2e74-73eb-11e7-8a39-434144de62b7.png)
+![image](https://user-images.githubusercontent.com/20232625/28767484-22a1d330-75d4-11e7-9667-01271c7e2448.png)
 
-![image](https://user-images.githubusercontent.com/20232625/28737014-ebc5dbba-73ec-11e7-99bf-1f190ee9a892.png)
+![image](https://user-images.githubusercontent.com/20232625/28767522-55f40ea6-75d4-11e7-8faf-0c1bf9f91953.png)
 
 ### Behaviour
 
