@@ -1,6 +1,6 @@
 {
-  "name": "typescript-immutable-replicator",
-  "version": "0.3.2",
+  "name": "typescript-immutable-helper",
+  "version": "0.1.0",
   "description": "Typesafe, refactorable Typescript replicator for immutable objects",
   "main": "index.ts",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maimArt/typescript-immutable-replicator.git"
+    "url": "git+https://github.com/maimArt/typescript-immutable-helper.git"
   },
   "keywords": [
     "typescript",
@@ -29,9 +29,9 @@
   "author": "Martin Maier",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/maimArt/typescript-immutable-replicator/issues"
+    "url": "https://github.com/maimArt/typescript-immutable-helper/issues"
   },
-  "homepage": "https://github.com/maimArt/typescript-immutable-replicator#readme",
+  "homepage": "https://github.com/maimArt/typescript-immutable-helper#readme",
   "dependencies": {
     "lodash": "^4.17.4"
   },

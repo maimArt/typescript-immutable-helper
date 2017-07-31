@@ -1,7 +1,7 @@
-# typescript-immutable-replicator
+# typescript-immutable-helper
 Typesafe, refactorable cloning and modifying of immutable objects with typescript
 
-[![NPM](https://nodei.co/npm/typescript-immutable-replicator.png)](https://nodei.co/npm/typescript-immutable-replicator/)
+[![NPM](https://nodei.co/npm/typescript-immutable-helper.png)](https://nodei.co/npm/typescript-immutable-helper/)
 
 ## Replicator
 
