@@ -1,6 +1,6 @@
 {
   "name": "typescript-immutable-replicator",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "Typesafe, refactorable Typescript replicator for immutable objects",
   "main": "index.ts",
   "scripts": {
@@ -23,7 +23,8 @@
     "state",
     "clone",
     "deep",
-    "copy"
+    "copy",
+    "assign"
   ],
   "author": "Martin Maier",
   "license": "MIT",

@@ -15,7 +15,7 @@ Replicator is a tool to replicate and modify immutable objects.
 
 ### Usage
 
-1. Load an object by calling `Replicator.forObject()`
+1. Load an object by calling `assign()`
 2. Navigate down the object tree through the typesafe function `child()`
 3. Modify a property with either 
     - `modify('prop').to(newValue:T)` or
