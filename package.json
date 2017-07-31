@@ -1,6 +1,6 @@
 {
   "name": "typescript-immutable-replicator",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Typesafe, refactorable Typescript replicator for immutable objects",
   "main": "index.ts",
   "scripts": {
