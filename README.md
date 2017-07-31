@@ -32,12 +32,10 @@ let replica = ReplicationBuilder.forObject(immutableObject).getChild("child").mo
 5. Produce the replica with `build()`
 
 ### Examples
-```Typescript
-let replica = ReplicationBuilder.forObject(state).getChild("party").modify("name").to("MyParty").build();
-```
-```Typescript
-let replica = ReplicationBuilder.forObject(state).getChild("party").modify("members").by((members) => [...members, newMember]);
-```
+
+![image](https://user-images.githubusercontent.com/20232625/28767484-22a1d330-75d4-11e7-9667-01271c7e2448.png)
+
+![image](https://user-images.githubusercontent.com/20232625/28767522-55f40ea6-75d4-11e7-8faf-0c1bf9f91953.png)
 
 ### Behaviour
 
