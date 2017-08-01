@@ -43,5 +43,33 @@ Replicator is a tool to replicate and modify immutable objects.
 
 ## DeepFreeze
 
+DeepFreeze freezes an object recursively and the developer is pointed to illegal state manipulations by errors in the javascript console.
+
 `deepFreeze()` applies Object.freeze() recursively on an object to make it immutable
 `isDeepFrozen()` checks if an object is recursively frozen.
+
+## Example: Usage of Replicator and DeepFreeze in an angular redux module
+
+```Typescript
+export class StoreModule {
+  constructor(/* ... */) {
+    /* ... */
+    const rootState = isDevMode()? deepFreeze(INITIAL_ROOTSTATE) : INITIAL_ROOTSTATE    
+
+    store.configureStore(
+      rootReducer,
+      rootState,
+      middlewares,
+      storeEnhancer
+    )
+  }
+}
+```
+
+If the state is initially frozen and you are using the Replicator for handling the updates, the state will get frozen again by the replicator.
+
+
+
+
+
+
