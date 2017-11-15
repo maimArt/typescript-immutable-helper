@@ -4,14 +4,15 @@
  * @returns {T} frozen object
  */
 export function deepFreeze<T>(object: T): T {
-    Object.freeze(object)
-    if (object === undefined) {
+    Object.freeze(object);
+
+    // skip deep freezing of non objects and functions
+    if (typeof object !== 'object') {
         return object
     }
 
-    // only freeze fields, no functions
     Object.getOwnPropertyNames(object)
-        .filter((prop) => object[prop] !== null && typeof object === 'object' && !Object.isFrozen(object[prop]))
+        .filter((prop) => object[prop] !== null && !Object.isFrozen(object[prop]))
         .forEach((prop) => deepFreeze(object[prop]))
 
     return object
@@ -23,15 +24,17 @@ export function deepFreeze<T>(object: T): T {
  * @returns {boolean}
  */
 export function isDeepFrozen(object): boolean {
-    let frozen = true
     if (Object.isFrozen(object)) {
-        frozen = Object.getOwnPropertyNames(object)
+        // skip deep testing of non objects and functions
+        if (typeof object !== 'object') {
+            return true
+        }
+
+        return Object.getOwnPropertyNames(object)
         // only objects, no functions
             .filter((prop) => object[prop] !== null && typeof object === 'object')
             .every((prop) => isDeepFrozen(object[prop]))
     } else {
-        frozen = false
+        return false
     }
-
-    return frozen
 }
