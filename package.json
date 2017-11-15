@@ -2,10 +2,12 @@
   "name": "typescript-immutable-helper",
   "version": "0.1.5",
   "description": "Helpers for handling immutable objects with typescript",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "mocha -r ts-node/register src/tests/*spec.ts"
+    "test": "mocha -r ts-node/register src/tests/*spec.ts",
+    "prepublishOnly": "npm install && npm run build"
   },
   "repository": {
     "type": "git",
