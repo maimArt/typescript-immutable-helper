@@ -55,7 +55,7 @@ export class ReplicationBuilder<T> {
 /**
  * Operator for nodes of the replica
  */
-class ReplicaChildOperator<RT, T> {
+export class ReplicaChildOperator<RT, T> {
     private buildFunction: ()=>RT
     private node: T
     private replica: RT;
@@ -90,7 +90,7 @@ class ReplicaChildOperator<RT, T> {
     }
 }
 
-class PropertyModifier<PT, VT> {
+export class PropertyModifier<PT, VT> {
     private replica: any
     private parent: PT
     private relativePathToRoot: string
