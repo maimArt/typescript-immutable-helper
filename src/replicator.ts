@@ -40,6 +40,15 @@ export class ReplicationBuilder<T> {
         return new PropertyModifier<ReplicationBuilder<T>, T[K]>(this, childNode, this.replica)
     }
 
+    delete<K extends keyof T>(childNode: K): ReplicationBuilder<T> {
+        if (this.replica[childNode]) {
+            delete this.replica[childNode]
+        }
+
+        return this;
+    }
+
+
     /**
      * produces the replica
      * @returns {T} replica
@@ -56,7 +65,7 @@ export class ReplicationBuilder<T> {
  * Operator for nodes of the replica
  */
 export class ReplicaChildOperator<RT, T> {
-    private buildFunction: ()=>RT
+    private buildFunction: () => RT
     private node: T
     private replica: RT;
     private relativePath;
@@ -81,12 +90,20 @@ export class ReplicaChildOperator<RT, T> {
         return new PropertyModifier<ReplicaChildOperator<RT, T>, T[K]>(this, this.relativePath + '.' + childNode, this.replica)
     }
 
+    delete<K extends keyof T>(childNode: K): ReplicaChildOperator<RT, T> {
+        if (this.node[childNode]) {
+            delete this.node[childNode]
+        }
+
+        return this;
+    }
+
     /**
      * produces the replica
      * @returns {RT} replica
      */
-    build():RT {
-      return this.buildFunction()
+    build(): RT {
+        return this.buildFunction()
     }
 }
 
