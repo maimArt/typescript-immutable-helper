@@ -21,6 +21,22 @@ describe('ReplicationBuilder', () => {
         expect(manipulatedRoot.subTypeA.subTypeB.subTypeBAttribute).to.equal('Test')
     })
 
+    it('Inputstate must not be modified, output node must be deleted', () => {
+        let rootState = new ClassorientedTeststate()
+        let manipulatedRoot = ReplicationBuilder.forObject(rootState).delete("subTypeA").build()
+
+        expect(rootState.subTypeA).to.exist
+        expect(manipulatedRoot.subTypeA).to.not.exist
+    })
+
+    it('Inputstate must not be modified, output child node must be deleted', () => {
+        let rootState = new ClassorientedTeststate()
+        let manipulatedRoot = ReplicationBuilder.forObject(rootState).getChild("subTypeA").delete("subTypeB").build()
+
+        expect(rootState.subTypeA.subTypeB).to.exist
+        expect(manipulatedRoot.subTypeA.subTypeB).to.not.exist
+    })
+
     it('with untyped structure: Inputstate must not be modified, output must be modified', () => {
         let rootState = SimpleTeststate
         let manipulatedRoot = ReplicationBuilder.forObject(rootState).getChild('subTypeB').modify("subtypeBAttribute").to('Test').build()
