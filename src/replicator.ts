@@ -31,12 +31,12 @@ export class ReplicationBuilder<T> {
      * @param {K} childNode of the root node
      * @returns {ReplicaChildOperator<T, T[K]>} operator of child node
      **/
-    public getChild<K extends keyof T>(childNode: K): ReplicaChildOperator<T, T[K]> {
+    public getChild<K extends Extract<keyof T, string>>(childNode: K): ReplicaChildOperator<T, T[K]> {
         let node = this.replica[childNode]
         return new ReplicaChildOperator((() => this.build()), this.replica, node, childNode)
     }
 
-    modify<K extends keyof T>(childNode: K): PropertyModifier<ReplicationBuilder<T>, T[K]> {
+    modify<K extends Extract<keyof T, string>>(childNode: K): PropertyModifier<ReplicationBuilder<T>, T[K]> {
         return new PropertyModifier<ReplicationBuilder<T>, T[K]>(this, childNode, this.replica)
     }
 
