@@ -26,6 +26,7 @@ Replicator is a tool to replicate and modify immutable objects.
 3. Modify a property with either 
     - `modify('prop').to(newValue:T)` or
     - `modify('prop').by((T) => newValue:T)` for example `((oldValue) => oldValue + newValue)`
+    - `delete('prop')` to remove the property in the resulting object
 4. Repeat step 3 and 4 until all modifications are done
 5. Produce the replica with `build()`
 
