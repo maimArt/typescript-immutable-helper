@@ -8,16 +8,16 @@ import {deepFreeze, isDeepFrozen} from './deepFreeze'
  * Warns if source object is just frozen, not deep frozen
  **/
 export class ReplicationBuilder<T> {
-    private replica: T = null
-    private freeze = false
+    private replica: T = null;
+    private freeze = false;
 
     /**
      * default constructor
      * @param {RT} sourceObject traversing object
      */
     private constructor(sourceObject: T) {
-        this.replica = _.cloneDeep(sourceObject)
-        this.freeze = Object.isFrozen(sourceObject)
+        this.replica = _.cloneDeep(sourceObject);
+        this.freeze = Object.isFrozen(sourceObject);
         if (this.freeze && !isDeepFrozen(sourceObject)) {
             console.warn('Source object is frozen but not deep frozen. Please care that always deepFreeze() is used to recursively freeze the object')
         }
@@ -31,12 +31,12 @@ export class ReplicationBuilder<T> {
      * @param {K} childNode of the root node
      * @returns {ReplicaChildOperator<T, T[K]>} operator of child node
      **/
-    public getChild<K extends Extract<keyof T, string>>(childNode: K): ReplicaChildOperator<T, T[K]> {
-        let node = this.replica[childNode]
+    public getChild<K extends keyof T>(childNode: K): ReplicaChildOperator<T, T[K]> {
+        let node = this.replica[childNode];
         return new ReplicaChildOperator((() => this.build()), this.replica, node, childNode)
     }
 
-    modify<K extends Extract<keyof T, string>>(childNode: K): PropertyModifier<ReplicationBuilder<T>, T[K]> {
+    modify<K extends keyof T>(childNode: K): PropertyModifier<ReplicationBuilder<T>, T[K]> {
         return new PropertyModifier<ReplicationBuilder<T>, T[K]>(this, childNode, this.replica)
     }
 
@@ -65,14 +65,14 @@ export class ReplicationBuilder<T> {
  * Operator for nodes of the replica
  */
 export class ReplicaChildOperator<RT, T> {
-    private buildFunction: () => RT
-    private node: T
+    private buildFunction: () => RT;
+    private node: T;
     private replica: RT;
     private relativePath;
 
-    constructor(buildFunction: () => RT, replica: RT, node: T, relativePath: string) {
-        this.buildFunction = buildFunction
-        this.node = node
+    constructor(buildFunction: () => RT, replica: RT, node: T, relativePath: string | number | symbol) {
+        this.buildFunction = buildFunction;
+        this.node = node;
         this.replica = replica;
         this.relativePath = relativePath;
     }
@@ -82,7 +82,7 @@ export class ReplicaChildOperator<RT, T> {
      * @returns {ReplicaChildOperator<RT, N[K]>} traversable child node
      **/
     getChild<K extends keyof T>(childNode: K): ReplicaChildOperator<RT, T[K]> {
-        let branch = this.node[childNode]
+        let branch = this.node[childNode];
         return new ReplicaChildOperator(this.buildFunction, this.replica, branch, this.relativePath + '.' + childNode)
     }
 
@@ -108,13 +108,13 @@ export class ReplicaChildOperator<RT, T> {
 }
 
 export class PropertyModifier<PT, VT> {
-    private replica: any
-    private parent: PT
-    private relativePathToRoot: string
+    private replica: any;
+    private parent: PT;
+    private relativePathToRoot: string | number | symbol;
 
-    constructor(parent: PT, relativePathToRoot: string, rootObject: any) {
-        this.replica = rootObject
-        this.parent = parent
+    constructor(parent: PT, relativePathToRoot: string | number | symbol, rootObject: any) {
+        this.replica = rootObject;
+        this.parent = parent;
         this.relativePathToRoot = relativePathToRoot
     }
 
@@ -124,7 +124,7 @@ export class PropertyModifier<PT, VT> {
      * @returns {PT}
      */
     to(value: VT): PT {
-        _.set(this.replica, this.relativePathToRoot, value)
+        _.set(this.replica, this.relativePathToRoot, value);
         return this.parent
     }
 
@@ -134,8 +134,8 @@ export class PropertyModifier<PT, VT> {
      * @returns PT this
      */
     by(setFunction: (VT) => VT): PT {
-        let currentvalue = _.get(this.replica, this.relativePathToRoot)
-        let value = setFunction(currentvalue)
+        let currentvalue = _.get(this.replica, this.relativePathToRoot);
+        let value = setFunction(currentvalue);
         return this.to(value)
     }
 }
