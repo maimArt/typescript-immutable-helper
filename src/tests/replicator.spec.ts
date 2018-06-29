@@ -5,6 +5,15 @@ import {deepFreeze, isDeepFrozen} from '../deepFreeze'
 
 describe('ReplicationBuilder', () => {
 
+    it('should clone a property and execute function on the clone ', function () {
+        let rootState = new ClassorientedTeststate();
+        let someNewValue = 'someNewValue';
+        let manipulatedRoot = ReplicationBuilder.forObject(rootState).replaceProperty('subTypeA').andDo((clonedSubTypeA) => {
+            clonedSubTypeA.setSubTypeAAttribute(someNewValue)
+        }).build();
+        expect(manipulatedRoot.subTypeA.subTypeAAttribute).to.equal(someNewValue);
+    });
+
     it('Inputstate must not be modified, output must be modified', () => {
         let rootState = new ClassorientedTeststate();
         let manipulatedRoot = ReplicationBuilder.forObject(rootState).getProperty('subTypeA').getProperty('subTypeB').replaceProperty('subTypeBAttribute').with('Test').build();
@@ -76,7 +85,7 @@ describe('ReplicationBuilder', () => {
     });
 
     it('test performance of frozen big array', () => {
-        let objectCount =  5000;
+        let objectCount = 5000;
         let rootState = new ObjectArray(objectCount);
         deepFreeze(rootState);
 
@@ -93,7 +102,7 @@ describe('ReplicationBuilder', () => {
     });
 
     it('test performance of not frozen big array', () => {
-        let objectCount =  5000;
+        let objectCount = 5000;
         let rootState = new ObjectArray(objectCount);
 
         let repeatCount = 1;

@@ -9,25 +9,29 @@ interface ISubTypeA{
 }
 
 export class SubTypeA extends ParentTypeA implements ISubTypeA{
-    subTypeAAttribute: string = null
-    subTypeAArray: string[] = []
-    subTypeB: SubTypeB = new SubTypeB()
+    subTypeAAttribute: string = null;
+    subTypeAArray: string[] = [];
+    subTypeB: SubTypeB = new SubTypeB();
+
+    setSubTypeAAttribute(newValue: string) {
+        this.subTypeAAttribute = newValue;
+    }
 
     doNothingFunction() {
         // do nothing
-        let test:number = 0
+        let test: number = 0;
         test = 1
     }
 }
 
 class SubTypeB {
-    subTypeBAttribute: string = null
-    subTypeBArray: string[] = []
+    subTypeBAttribute: string = null;
+    subTypeBArray: string[] = [];
     subTypeB: SubTypeC = new SubTypeC()
 }
 
 class SubTypeC {
-    subTypeCAttribute: string = null
+    subTypeCAttribute: string = null;
     subTypeCArray: string[] = []
 }
 
@@ -41,7 +45,7 @@ export const SimpleTeststate = {
     subTypeB: {
         subtypeBAttribute: 'initial'
     }
-}
+};
 
 export class SomeObject {
     attA: string;
@@ -51,9 +55,9 @@ export class SomeObject {
 
 
     constructor(attA: string, attB: string, attC: string, attD: string) {
-        this.attA = attA
-        this.attB = attB
-        this.attC = attC
+        this.attA = attA;
+        this.attB = attB;
+        this.attC = attC;
         this.attD = attD
     }
 }

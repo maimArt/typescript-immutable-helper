@@ -195,4 +195,15 @@ export class PropertyModifier<PT, VT> {
         let value = setFunction(currentvalue);
         return this.with(value)
     }
+
+    /**
+     * applies a function on this property
+     * @param {(VT) => void} executeOnCloneFunction function that is executed
+     * @returns {PT}
+     */
+    andDo(executeOnCloneFunction: (VT) => void): PT {
+        let currentvalue = _.get(this.replica, this.relativePathToRoot);
+        executeOnCloneFunction(currentvalue);
+        return this.parent;
+    }
 }
