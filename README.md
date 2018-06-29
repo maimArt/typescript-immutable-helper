@@ -8,33 +8,46 @@ Helpers for handling immutable objects with typescript
 Replicator is a tool to replicate and modify immutable objects.
 
 ### Syntax
-![image](https://user-images.githubusercontent.com/20232625/28767484-22a1d330-75d4-11e7-9667-01271c7e2448.png)
+##### simply replace property by with new value
+```Typescript
+return ReplicationBuilder.forObject(state).getProperty('party').replaceProperty('name').with('MyParty').build()
+```
+##### replace property depending on old value
+```Typescript
+return ReplicationBuilder.forObject(state).getProperty('party').replaceProperty('partymemberArray').by((oldPartymemberArray) => [...oldPartymemberArray, 'new partymember']).build()
+```
+##### clone property and apply some function on it
+```Typescript
+return ReplicationBuilder.forObject(state).replaceProperty('party').andDo((clonedParty) => clonedParty.addPartyMember('new partymember')).build()
+```
 
 ### Characteristics
-###### typesafe properties
+##### typesafe properties
+
 ![image](https://user-images.githubusercontent.com/20232625/28767468-14cb5aa6-75d4-11e7-8193-dcf828133035.png)
-###### typesafe property values
+##### typesafe property values
+
 ![image](https://user-images.githubusercontent.com/20232625/28767500-3b6f082e-75d4-11e7-8ec3-1e1392209396.png)
-###### chainable
-![image](https://user-images.githubusercontent.com/20232625/28767664-dc00269c-75d4-11e7-9c6d-c179c0b12eaf.png)
+##### chainable
+```Typescript
+return ReplicationBuilder.forObject(state)
+    .getProperty('party').replaceProperty('name').with('MyParty').replaceProperty('members').by((members) => [...members, newMember])
+    .getProperty('initiator').replaceProperty('prename').with('Party').replaceProperty('surname').with('guy')
+    .build();
+```
 ###### refactorable and easy to read
 
 ### Usage
 
 1. Load an object by calling `ReplicationBuilder.forObject()`
 2. Navigate down the object tree through the typesafe function `getChild()`
-3. Modify a property with either 
-    - `modify('prop').to(newValue:T)` or
-    - `modify('prop').by((T) => newValue:T)` for example `((oldValue) => oldValue + newValue)`
-    - `delete('prop')` to remove the property in the resulting object
+3. Modify a property with either (see syntax paragraph above)
+    - `replaceProperty('prop').with(newValue:T)`
+    - `replaceProperty('prop').by((T) => newValue:T)`
+    - `replaceProperty('prop').andDo((clonedProp) => clonedProp.doSomething()`    
+    - `removeProperty('prop')` to remove the property in the resulting object
 4. Repeat step 3 and 4 until all modifications are done
 5. Produce the replica with `build()`
-
-### Examples
-
-![image](https://user-images.githubusercontent.com/20232625/28767484-22a1d330-75d4-11e7-9667-01271c7e2448.png)
-
-![image](https://user-images.githubusercontent.com/20232625/28767522-55f40ea6-75d4-11e7-8faf-0c1bf9f91953.png)
 
 ### Behaviour
 
