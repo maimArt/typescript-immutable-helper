@@ -1,49 +1,38 @@
-class ParentTypeA {
-    parentAttribute:string = "i am your father";
+interface Band {
+    name: string;
+    members: string[];
+    homeland: Country;
 }
 
-interface ISubTypeA{
-    subTypeAAttribute: string;
-    subTypeAArray: string[];
-    subTypeB: SubTypeB;
-}
+export class Rockband implements Band {
+    name: string = null;
+    members: string[] = [];
+    homeland: Country = new Country();
 
-export class SubTypeA extends ParentTypeA implements ISubTypeA{
-    subTypeAAttribute: string = null;
-    subTypeAArray: string[] = [];
-    subTypeB: SubTypeB = new SubTypeB();
-
-    setSubTypeAAttribute(newValue: string) {
-        this.subTypeAAttribute = newValue;
-    }
-
-    doNothingFunction() {
-        // do nothing
-        let test: number = 0;
-        test = 1
+    changeNameTo(newValue: string) {
+        this.name = newValue;
     }
 }
 
-class SubTypeB {
-    subTypeBAttribute: string = null;
-    subTypeBArray: string[] = [];
-    subTypeB: SubTypeC = new SubTypeC()
+class Country {
+    name: string = null;
+    language: Language = new Language()
 }
 
-class SubTypeC {
-    subTypeCAttribute: string = null;
-    subTypeCArray: string[] = []
+class Language {
+    name: String;
 }
 
-export class ClassorientedTeststate {
-    subTypeA: SubTypeA = new SubTypeA()
+export class Concert {
+    name: String;
+    band: Rockband = new Rockband()
 }
 
-export const SimpleTeststate = {
-    subTypeAAttribute: 'initial',
-    subTypeAArray: ['initial'],
-    subTypeB: {
-        subtypeBAttribute: 'initial'
+export const SimpleBand = {
+    name: 'initial',
+    members: ['initial'],
+    genre: {
+        name: 'initial'
     }
 };
 
@@ -65,9 +54,9 @@ export class SomeObject {
 export class ObjectArray {
     array: SomeObject[] = [];
 
-    constructor(count: number){
-        for(let i = 0; i < count; i++){
-            this.array[i] = new SomeObject("AttributeA"+ i,"AttributeB"+ i,"AttributeC"+ i,"AttributeD"+ i)
+    constructor(count: number) {
+        for (let i = 0; i < count; i++) {
+            this.array[i] = new SomeObject('AttributeA' + i, 'AttributeB' + i, 'AttributeC' + i, 'AttributeD' + i)
         }
     }
 }

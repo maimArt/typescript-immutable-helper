@@ -2,7 +2,7 @@ import * as _ from 'lodash'
 import {deepFreeze, isDeepFrozen} from './deepFreeze'
 
 /**
- * Class that helps to replicate a new object by encapsulating a deep copy of the source object
+ * Class that helps to replaceValueOf a new object by encapsulating a deep copy of the source object
  * If input object is frozen by (@link Object.freeze()} or {@link deepFreeze} then the replica will be produced frozen
  * freeze in --> deep freeze out
  * Warns if source object is just frozen, not deep frozen
@@ -29,30 +29,30 @@ export class ReplicationBuilder<T> {
 
     /**
      * @deprecated since 0.4.1
-     * use getProperty instead
+     * use property instead
      */
     public getChild<K extends keyof T>(childNode: K): ReplicaChildOperator<T, T[K]> {
-        return this.getProperty(childNode);
+        return this.property(childNode);
     }
 
     /** switch to child node
      * @param {K} childNode of the root node
      * @returns {ReplicaChildOperator<T, T[K]>} operator of child node
      **/
-    public getProperty<K extends keyof T>(childNode: K): ReplicaChildOperator<T, T[K]> {
+    public property<K extends keyof T>(childNode: K): ReplicaChildOperator<T, T[K]> {
         let node = this.replica[childNode];
         return new ReplicaChildOperator((() => this.build()), this.replica, node, childNode)
     }
 
     /**
      * @deprecated since 0.4.1
-     * use replaceProperty instead
+     * use replaceValueOf instead
      */
     public modify<K extends keyof T>(childNode: K): PropertyModifier<ReplicationBuilder<T>, T[K]> {
-        return this.replaceProperty(childNode);
+        return this.replaceValueOf(childNode);
     }
 
-    public replaceProperty<K extends keyof T>(childNode: K): PropertyModifier<ReplicationBuilder<T>, T[K]> {
+    public replaceValueOf<K extends keyof T>(childNode: K): PropertyModifier<ReplicationBuilder<T>, T[K]> {
         return new PropertyModifier<ReplicationBuilder<T>, T[K]>(this, childNode, this.replica)
     }
 
@@ -103,10 +103,10 @@ export class ReplicaChildOperator<RT, T> {
 
     /**
      * @deprecated since 0.4.1
-     * use getProperty instead
+     * use property instead
      */
     getChild<K extends keyof T>(childNode: K): ReplicaChildOperator<RT, T[K]> {
-        return this.getProperty(childNode);
+        return this.property(childNode);
     }
 
 
@@ -114,20 +114,20 @@ export class ReplicaChildOperator<RT, T> {
      * @param {K} childNode of this node
      * @returns {ReplicaChildOperator<RT, N[K]>} traversable child node
      **/
-    getProperty<K extends keyof T>(childNode: K): ReplicaChildOperator<RT, T[K]> {
+    property<K extends keyof T>(childNode: K): ReplicaChildOperator<RT, T[K]> {
         let branch = this.node[childNode];
         return new ReplicaChildOperator(this.buildFunction, this.replica, branch, this.relativePath + '.' + childNode)
     }
 
     /**
      * @deprecated since 0.4.1
-     * use replaceProperty instead
+     * use replaceValueOf instead
      */
     modify<K extends keyof T>(childNode: K): PropertyModifier<ReplicaChildOperator<RT, T>, T[K]> {
-        return this.replaceProperty(childNode);
+        return this.replaceValueOf(childNode);
     }
 
-    replaceProperty<K extends keyof T>(childNode: K): PropertyModifier<ReplicaChildOperator<RT, T>, T[K]> {
+    replaceValueOf<K extends keyof T>(childNode: K): PropertyModifier<ReplicaChildOperator<RT, T>, T[K]> {
         return new PropertyModifier<ReplicaChildOperator<RT, T>, T[K]>(this, this.relativePath + '.' + childNode, this.replica)
     }
 
@@ -201,7 +201,7 @@ export class PropertyModifier<PT, VT> {
      * @param {(VT) => void} executeOnCloneFunction function that is executed
      * @returns {PT}
      */
-    andDo(executeOnCloneFunction: (VT) => void): PT {
+    withCloneAndDo(executeOnCloneFunction: (VT) => void): PT {
         let currentvalue = _.get(this.replica, this.relativePathToRoot);
         executeOnCloneFunction(currentvalue);
         return this.parent;
