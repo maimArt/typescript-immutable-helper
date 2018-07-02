@@ -24,10 +24,10 @@ describe('ReplicationBuilder', () => {
 
     it('Inputstate must not be modified, output must be modified', () => {
         let rootState = new Concert();
-        let manipulatedRoot = ReplicationBuilder.forObject(rootState).property('band').property('homeland').replaceValueOf('name').with('Russia').build();
+        let manipulatedRoot = ReplicationBuilder.forObject(rootState).property('band').property('homeland').replaceValueOf('name').with('Germany').build();
 
         expect(rootState.band.homeland.name).to.null;
-        expect(manipulatedRoot.band.homeland.name).to.equal('Russia')
+        expect(manipulatedRoot.band.homeland.name).to.equal('Germany')
     });
 
     it('Inputstate must not be modified, output node must be deleted', () => {
@@ -114,5 +114,7 @@ describe('ReplicationBuilder', () => {
 
 
         expect(durationinMS).to.be.below(100)
-    })
+    });
+
+
 });
