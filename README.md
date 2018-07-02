@@ -40,7 +40,7 @@ return ReplicationBuilder.forObject(state)
 ### Usage
 
 1. Load an object by calling `ReplicationBuilder.forObject()`
-2. Navigate down the object tree through the typesafe function `getChild()`
+2. Navigate down the object tree through the typesafe function `property()`
 3. Modify a property with either (see syntax paragraph above)
     - `replaceValueOf('prop').with(newValue:T)`
     - `replaceValueOf('prop').by((T) => newValue:T)`
