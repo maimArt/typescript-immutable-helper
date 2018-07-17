@@ -1,4 +1,6 @@
-import * as _ from 'lodash'
+import * as _cloneDeep from 'lodash.clonedeep'
+import * as _set from 'lodash.set'
+import * as _get from 'lodash.get'
 import {deepFreeze, isDeepFrozen} from './deepFreeze'
 
 /**
@@ -16,7 +18,7 @@ export class ReplicationBuilder<T> {
      * @param {RT} sourceObject traversing object
      */
     private constructor(sourceObject: T) {
-        this.replica = _.cloneDeep(sourceObject);
+        this.replica = _cloneDeep(sourceObject);
         this.freeze = Object.isFrozen(sourceObject);
         if (this.freeze && !isDeepFrozen(sourceObject)) {
             console.warn('Source object is frozen but not deep frozen. Please care that always deepFreeze() is used to recursively freeze the object')
@@ -181,7 +183,7 @@ export class PropertyModifier<PT, VT> {
      * @returns {PT}
      */
     with(value: VT): PT {
-        _.set(this.replica, this.relativePathToRoot, value);
+        _set(this.replica, this.relativePathToRoot, value);
         return this.parent
     }
 
@@ -191,7 +193,7 @@ export class PropertyModifier<PT, VT> {
      * @returns PT this
      */
     by(setFunction: (VT) => VT): PT {
-        let currentvalue = _.get(this.replica, this.relativePathToRoot);
+        let currentvalue = _get(this.replica, this.relativePathToRoot);
         let value = setFunction(currentvalue);
         return this.with(value)
     }
@@ -202,7 +204,7 @@ export class PropertyModifier<PT, VT> {
      * @returns {PT}
      */
     withCloneAndDo(executeOnCloneFunction: (VT) => void): PT {
-        let currentvalue = _.get(this.replica, this.relativePathToRoot);
+        let currentvalue = _get(this.replica, this.relativePathToRoot);
         executeOnCloneFunction(currentvalue);
         return this.parent;
     }

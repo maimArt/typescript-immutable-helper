@@ -112,9 +112,7 @@ describe('ReplicationBuilder', () => {
         let durationinMS = new Date().getTime() - startTimestamp;
         console.info(repeatCount + ' clone repetitions with ' + objectCount + ' objects took ' + durationinMS + 'ms');
 
-
         expect(durationinMS).to.be.below(100)
     });
-
 
 });
